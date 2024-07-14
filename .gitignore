@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+
+# Python virtual envs
+.venv/
+venv/
+
+# Project specific
+catalog.json
