@@ -27,6 +27,7 @@ class GithubSource(Source):
         "KeenSecurityLab/BinAbsInspector",
         "kotcrab/ghidra-allegrex",
         "kotcrab/ghidra-rest-api",
+        "lab313ru/ghidra_psx_ldr",
         "likvidera/GhidraChatGPT",
         "nccgroup/ghidra-nanomips",
         "nccgroup/ghostrings",
