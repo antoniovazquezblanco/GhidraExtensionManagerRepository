@@ -40,6 +40,7 @@ class GithubSource(Source):
         "nccgroup/ghostrings",
         "nicodex/ghidra_motorolaffp",
         "nneonneo/ghidra-wasm-plugin",
+        "marysaka/ghidra_falcon",
         "mooncat-greenpy/Ghidra_GolangAnalyzerExtension",
         "pedro-javierf/NTRGhidra",
         "rafalh/ghidra-dwarf1",
