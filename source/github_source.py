@@ -17,6 +17,7 @@ class GithubSource(Source):
         "al3xtjames/ghidra-firmware-utils",
         "Adubbz/Ghidra-Switch-Loader",
         "antoniovazquezblanco/GhidraDeviceTreeBlob",
+        "antoniovazquezblanco/GhidraExtendedSourceParser",
         "antoniovazquezblanco/GhidraExtensionManager",
         "antoniovazquezblanco/GhidraFindcrypt",
         "antoniovazquezblanco/GhidraSVD",
