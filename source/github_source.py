@@ -29,6 +29,7 @@ class GithubSource(Source):
         "CreepNT/VitaLoaderRedux",
         "Cuyler36/Ghidra-GameCube-Loader",
         "desrdev/ghidra-fr60",
+        "domenukk/dragondance",
         "fmagin/ghidra-minesweeper",
         "Gekkio/GhidraBoy",
         "hazzaaclark/gdiGhidra",
