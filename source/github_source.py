@@ -13,7 +13,6 @@ from model.extension_version import ExtensionVersion
 
 class GithubSource(Source):
     GH_SOURCES = [
-        "0ffffffffh/dragondance",
         "al3xtjames/ghidra-firmware-utils",
         "Adubbz/Ghidra-Switch-Loader",
         "antoniovazquezblanco/GhidraDeviceTreeBlob",
