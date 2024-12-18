@@ -32,6 +32,7 @@ class GithubSource(Source):
         "fmagin/ghidra-minesweeper",
         "Gekkio/GhidraBoy",
         "hazzaaclark/gdiGhidra",
+        "jtang613/GhidrAssist",
         "KeenSecurityLab/BinAbsInspector",
         "kotcrab/ghidra-allegrex",
         "kotcrab/ghidra-rest-api",
