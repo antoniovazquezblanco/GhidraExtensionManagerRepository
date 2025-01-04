@@ -27,6 +27,7 @@ class GithubSource(Source):
         "Coder-256/IntcodeGhidra",
         "CreepNT/VitaLoaderRedux",
         "Cuyler36/Ghidra-GameCube-Loader",
+        "cyberkaida/reverse-engineering-assistant",
         "desrdev/ghidra-fr60",
         "domenukk/dragondance",
         "fmagin/ghidra-minesweeper",
