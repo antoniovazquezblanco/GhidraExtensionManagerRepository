@@ -60,6 +60,7 @@ class GithubSource(Source):
         "westfox-5/GhidraMetrics",
         "XboxDev/ghidra-xbe",
         "XYFC128/GhidraLookup",
+        "Ziemas/ghidra_irx",
     ]
 
     def __init__(self, repo, token=None):
