@@ -48,6 +48,7 @@ class GithubSource(Source):
         "mooncat-greenpy/Ghidra_GolangAnalyzerExtension",
         "oshogbo/ghidra-lx-loader",
         "pedro-javierf/NTRGhidra",
+        "radareorg/ghidra-r2web",
         "rafalh/ghidra-dwarf1",
         "Random06457/Ghidra-RSP",
         "RobertLarsen/GhidraFirmwareToolkit",
