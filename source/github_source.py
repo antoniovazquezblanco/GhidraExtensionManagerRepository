@@ -55,6 +55,7 @@ class GithubSource(Source):
         "Random06457/Ghidra-RSP",
         "RobertLarsen/GhidraFirmwareToolkit",
         "roysmeding/ghidra-os9",
+        "sigurasg/GhidraMC6800",
         "sigurasg/GhidraTek2465",
         "subreption/ghidra_yara",
         "ubfx/BinDiffHelper",
