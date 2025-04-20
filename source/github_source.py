@@ -69,6 +69,7 @@ class GithubSource(Source):
         "subreption/ghidra_yara",
         "ubfx/BinDiffHelper",
         "VDOO-Connected-Trust/KotlinScriptProvider",
+        "Washi1337/ghidra-nativeaot",
         "westfox-5/GhidraMetrics",
         "XboxDev/ghidra-xbe",
         "XYFC128/GhidraLookup",
