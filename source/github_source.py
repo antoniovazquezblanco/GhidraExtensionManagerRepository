@@ -35,7 +35,7 @@ class GithubSource(Source):
         "fmagin/ghidra-minesweeper",
         "Gekkio/GhidraBoy",
         "goatshriek/ruby-dragon",
-        "hazzaaclark/gdiGhidra",
+        "hazzaclark/gdiGhidra",
         "ilyakharlamov/Ghidra-Nes-Rom-Decompiler-Plugin",
         "imxeno/ghidracord",
         "jtang613/GhidrAssist",
