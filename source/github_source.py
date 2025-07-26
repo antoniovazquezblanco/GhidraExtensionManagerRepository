@@ -82,7 +82,7 @@ class GithubSource(Source):
         auth = Auth.Token(token=token) if token else None
         self._gh = Github(auth=auth)
         self._repo = repo
-        self._asset_name_regex = re.compile(r'\.zip$')
+        self._asset_name_suffix = '.zip'
 
     def _get_latest_release_assets(self):
         repo = self._gh.get_repo(self._repo)
@@ -90,8 +90,8 @@ class GithubSource(Source):
         print(f"[+] Found release with title '{release.title}'")
         # Filter out the non-zip assets...abs
         assets = [
-            asset for asset in release.assets if self._asset_name_regex.match(asset.name)]
-        return release.assets
+            asset for asset in release.assets if asset.name.endswith(self._asset_name_suffix)]
+        return assets
 
     def _get_props_from_asset(self, asset):
         r = requests.get(asset.browser_download_url)
@@ -122,6 +122,9 @@ class GithubSource(Source):
         if not extension:
             print("[!] Could not locate a valid asset for this extension...")
         return extension
+
+    def name(self) -> str:
+        return str(self)
 
     def __str__(self):
         return f"GithubSource@{self._repo}"

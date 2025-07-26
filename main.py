@@ -7,7 +7,7 @@ from model.catalog import Catalog
 from source.source import Source
 
 
-def create_catalog(gh_token=None):
+def create_catalog(gh_token=None, source_filter=None):
     # If a previous catalog file exists, delete it...
     catalog_file = Path('catalog.json')
     if catalog_file.exists():
@@ -16,6 +16,8 @@ def create_catalog(gh_token=None):
     catalog = Catalog()
 
     for s in Source.list_sources(gh_token):
+        if source_filter and not source_filter in s.name():
+            continue
         try:
             print(f"[+] Retrieving extensions from {s}...")
             catalog.add_extension(s.list_extensions())
@@ -31,8 +33,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--gh-token", help="Github API token to avoid rate limiting")
+    parser.add_argument("--source-filter", help="Source name filter", type=str, default=None)
     args = parser.parse_args()
-    create_catalog(args.gh_token)
+    create_catalog(args.gh_token, args.source_filter)
 
 
 if __name__ == "__main__":
