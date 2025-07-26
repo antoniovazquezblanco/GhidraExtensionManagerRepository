@@ -24,7 +24,7 @@ def _property_parse(content: str):
         "version": None
     }
     for line in content.splitlines():
-        if line.startswith("#"):
+        if not line or line.startswith("#"):
             continue
         key, value = line.split("=")
         if value == "":
