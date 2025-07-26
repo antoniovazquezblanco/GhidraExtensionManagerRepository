@@ -54,6 +54,7 @@ class GithubSource(Source):
         "nicodex/ghidra_motorolaffp",
         "nneonneo/ghidra-wasm-plugin",
         "marysaka/ghidra_falcon",
+        "mobilemutex/GhidraCalculator",
         "mooncat-greenpy/Ghidra_GolangAnalyzerExtension",
         "oshogbo/ghidra-lx-loader",
         "pedro-javierf/NTRGhidra",
