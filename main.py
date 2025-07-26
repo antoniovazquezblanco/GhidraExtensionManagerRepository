@@ -17,11 +17,12 @@ def create_catalog(gh_token=None):
 
     for s in Source.list_sources(gh_token):
         try:
-            print(f"\n\nRetrieving extensions from {s}...")
+            print(f"Retrieving extensions from {s}...")
             catalog.add_extension(s.list_extensions())
         except Exception as e:
             print(f"Could not retrieve extensions for {s}")
             print(e)
+        print("")
 
     catalog.write_to_file(catalog_file)
 
