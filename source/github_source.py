@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 import io
+import re
 import zipfile
 import requests
 from github import Auth, Github
@@ -81,7 +82,7 @@ class GithubSource(Source):
         auth = Auth.Token(token=token) if token else None
         self._gh = Github(auth=auth)
         self._repo = repo
-        self._regex = r'ghidra_(?P<version>.+)_PUBLIC_.+_(?P<name>.+)\.zip'
+        self._asset_name_regex = re.compile(r'\.zip$')
 
     def _get_latest_release_assets(self):
         repo = self._gh.get_repo(self._repo)
@@ -89,7 +90,7 @@ class GithubSource(Source):
         print(f"[+] Found release with title '{release.title}'")
         # Filter out the non-zip assets...abs
         assets = [
-            asset for asset in release.assets if asset.name.endswith('.zip')]
+            asset for asset in release.assets if self._asset_name_regex.match(asset.name)]
         return release.assets
 
     def _get_props_from_asset(self, asset):
