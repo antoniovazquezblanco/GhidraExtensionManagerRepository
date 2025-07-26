@@ -86,7 +86,7 @@ class GithubSource(Source):
     def _get_latest_release_assets(self):
         repo = self._gh.get_repo(self._repo)
         release = repo.get_latest_release()
-        print(f"Found release with title '{release.title}'")
+        print(f"[+] Found release with title '{release.title}'")
         # Filter out the non-zip assets...abs
         assets = [
             asset for asset in release.assets if asset.name.endswith('.zip')]
@@ -106,20 +106,20 @@ class GithubSource(Source):
         extension = None
         for asset in assets:
             try:
-                print(f"Processing asset '{asset.name}'")
+                print(f"[+] Processing asset '{asset.name}'")
                 props = self._get_props_from_asset(asset)
                 if not extension:
                     extension = Extension(
                         name=props['name'], description=props['description'], author=props['author'], created_on=props['createdOn'])
-                    print(f"Found new extension named '{extension._name}'")
+                    print(f"[+] Found new extension named '{extension._name}'")
                 if extension:
                     extension.add_version(ExtensionVersion(
                         version=props['version'], url=asset.browser_download_url))
-                    print(f"Found extension for Ghidra {props['version']}")
+                    print(f"[+] Found extension for Ghidra {props['version']}")
             except InvalidExtensionZip as e:
                 pass
         if not extension:
-            print("Could not locate a valid asset for this extension...")
+            print("[!] Could not locate a valid asset for this extension...")
         return extension
 
     def __str__(self):
