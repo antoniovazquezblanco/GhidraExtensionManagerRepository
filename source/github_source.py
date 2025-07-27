@@ -37,6 +37,7 @@ class GithubSource(Source):
         "Gekkio/GhidraBoy",
         "goatshriek/ruby-dragon",
         "hazzaclark/gdiGhidra",
+        "hippietrail/RetroGhidra",
         "ilyakharlamov/Ghidra-Nes-Rom-Decompiler-Plugin",
         "imxeno/ghidracord",
         "jtang613/GhidrAssist",
