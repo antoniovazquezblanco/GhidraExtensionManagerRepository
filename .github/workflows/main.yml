@@ -13,7 +13,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v5
     - name: Setup python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
     - name: Install Python packages
       run: pip install -r requirements.txt
     - name: Generate catalog
