@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 import io
-import re
 import zipfile
 import requests
 from github import Auth, Github
@@ -23,6 +22,7 @@ class GithubSource(Source):
         "antoniovazquezblanco/GhidraInvalidMemoryRefs",
         "antoniovazquezblanco/GhidraSVD",
         "antoniovazquezblanco/GhidraSystemmap",
+        "antoniovazquezblanco/GhidraTopSM",
         "BartmanAbyss/ghidra-amiga",
         "boricj/ghidra-delinker-extension",
         "chaoticgd/ghidra-emotionengine-reloaded",
