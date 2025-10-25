@@ -28,6 +28,7 @@ class GithubSource(Source):
         "chaoticgd/ghidra-emotionengine-reloaded",
         "Coder-256/IntcodeGhidra",
         "CreepNT/VitaLoaderRedux",
+        "CUB3D/ghidra-hexagon-sleigh",
         "Cuyler36/Ghidra-GameCube-Loader",
         "cyberkaida/reverse-engineering-assistant",
         "desrdev/ghidra-fr60",
