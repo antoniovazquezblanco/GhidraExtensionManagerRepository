@@ -41,4 +41,6 @@ jobs:
       with:
         name: ${{ env.date }}
         tag_name: latest
-        files: artifact/catalog.json
+        files: catalog.json
+        overwrite_files: true
+        fail_on_unmatched_files: true
