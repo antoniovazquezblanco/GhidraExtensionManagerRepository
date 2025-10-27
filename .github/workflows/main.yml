@@ -21,7 +21,7 @@ jobs:
     - name: Generate catalog
       run: python main.py --gh-token ${{ secrets.GITHUB_TOKEN }}
     - name: Upload artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         path: catalog.json
 
