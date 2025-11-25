@@ -24,7 +24,7 @@ def create_catalog(gh_token=None, source_filter=None):
         except Exception as e:
             print(f"[!] Could not retrieve extensions for {s}")
             print(e)
-        print("")
+        print("\n\n")
 
     catalog.write_to_file(catalog_file)
 
