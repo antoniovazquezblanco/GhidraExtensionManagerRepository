@@ -23,6 +23,7 @@ class GithubSource(Source):
         "antoniovazquezblanco/GhidraSVD",
         "antoniovazquezblanco/GhidraSystemmap",
         "antoniovazquezblanco/GhidraTopSM",
+        "Baldanos/ghidra-bflt-loader",
         "BartmanAbyss/ghidra-amiga",
         "boricj/ghidra-delinker-extension",
         "chaoticgd/ghidra-emotionengine-reloaded",
