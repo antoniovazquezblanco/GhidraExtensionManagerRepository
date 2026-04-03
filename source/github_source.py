@@ -77,6 +77,7 @@ class GithubSource(Source):
         "sigurasg/GhidraMC6800",
         "sigurasg/GhidraTek2465",
         "subreption/ghidra_yara",
+        "symgraph/GhidrAssist",
         "ubfx/BinDiffHelper",
         "VDOO-Connected-Trust/KotlinScriptProvider",
         "Washi1337/ghidra-nativeaot",
