@@ -80,6 +80,7 @@ class GithubSource(Source):
         "westfox-5/GhidraMetrics",
         "XboxDev/ghidra-xbe",
         "XYFC128/GhidraLookup",
+        "zeroKilo/XEXLoaderWV",
         "Ziemas/ghidra_irx",
     ]
 
