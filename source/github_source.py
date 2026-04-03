@@ -24,6 +24,7 @@ class GithubSource(Source):
         "antoniovazquezblanco/GhidraSVD",
         "antoniovazquezblanco/GhidraSystemmap",
         "antoniovazquezblanco/GhidraTopSM",
+        "astrelsky/GhidraOrbis",
         "Baldanos/ghidra-bflt-loader",
         "BartmanAbyss/ghidra-amiga",
         "boricj/ghidra-delinker-extension",
