@@ -20,6 +20,7 @@ class GithubSource(Source):
         "antoniovazquezblanco/GhidraExtensionManager",
         "antoniovazquezblanco/GhidraFindcrypt",
         "antoniovazquezblanco/GhidraInvalidMemoryRefs",
+        "antoniovazquezblanco/GhidraLinkerScript",
         "antoniovazquezblanco/GhidraSVD",
         "antoniovazquezblanco/GhidraSystemmap",
         "antoniovazquezblanco/GhidraTopSM",
