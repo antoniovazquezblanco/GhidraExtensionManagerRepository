@@ -28,6 +28,7 @@ class GithubSource(Source):
         "BartmanAbyss/ghidra-amiga",
         "boricj/ghidra-delinker-extension",
         "chaoticgd/ghidra-emotionengine-reloaded",
+        "clienthax/Ps3GhidraScripts",
         "Coder-256/IntcodeGhidra",
         "CreepNT/VitaLoaderRedux",
         "CUB3D/ghidra-hexagon-sleigh",
