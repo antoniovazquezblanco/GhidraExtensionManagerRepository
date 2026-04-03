@@ -36,6 +36,7 @@ class GithubSource(Source):
         "desrdev/ghidra-fr60",
         "diommsantos/Gx64Sync",
         "domenukk/dragondance",
+        "edmcman/ghidra-scala-loader",
         "fmagin/ghidra-minesweeper",
         "Gekkio/GhidraBoy",
         "goatshriek/ruby-dragon",
