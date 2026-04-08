@@ -9,15 +9,16 @@ from model.extension import Extension, ExtensionEncoder
 
 class Catalog:
     def __init__(self, date=datetime.datetime.now()):
-        # The version field is to keep readers compatible whenever the format changes. If a field of this class changes, it should be bumped.
-        self._version = 0
+        # Internal format version to keep readers compatible whenever the format changes.
+        # If a field of this class changes, changing the encoder, it should be bumped.
+        self._fmt_version = 0
         self._date = date
         self._extensions = []
 
     def add_extension(self, extension: Extension):
-        if self._version != extension._fmt_version:
+        if self._fmt_version != extension._fmt_version:
             raise Exception(
-                "Extension version does not match catalog version. Please bump catalog version if needed."
+                "Extension fmt version does not match catalog fmt version. Please bump catalog fmt version if needed."
             )
         self._extensions.append(extension)
 
@@ -27,11 +28,11 @@ class Catalog:
 
 
 class CatalogEncoder(ExtensionEncoder):
-    def default(self, obj):
-        if isinstance(obj, Catalog):
+    def default(self, o):
+        if isinstance(o, Catalog):
             return {
-                "version": obj._version,
-                "date": obj._date.isoformat(),
-                "extensions": obj._extensions,
+                "version": o._fmt_version,
+                "date": o._date.isoformat(),
+                "extensions": o._extensions,
             }
-        return super().default(obj)
+        return super().default(o)
