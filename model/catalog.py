@@ -15,13 +15,14 @@ class Catalog:
         self._extensions = []
 
     def add_extension(self, extension: Extension):
-        if self._version != extension._version:
+        if self._version != extension._fmt_version:
             raise Exception(
-                "Extension version does not match catalog version. Please bump catalog version if needed.")
+                "Extension version does not match catalog version. Please bump catalog version if needed."
+            )
         self._extensions.append(extension)
 
     def write_to_file(self, path: Path):
-        with path.open(mode='w') as f:
+        with path.open(mode="w") as f:
             json.dump(self, f, cls=CatalogEncoder)
 
 
@@ -31,6 +32,6 @@ class CatalogEncoder(ExtensionEncoder):
             return {
                 "version": obj._version,
                 "date": obj._date.isoformat(),
-                "extensions": obj._extensions
+                "extensions": obj._extensions,
             }
         return super().default(obj)

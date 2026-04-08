@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-import json
 from model.extension_version import ExtensionVersion, ExtensionVersionEncoder
 
 
 class Extension:
     def __init__(self, name, description=None, author=None, created_on=None):
-        self._version = 0
+        # Internal format version to keep readers compatible whenever the format changes.
+        # If a field of this class changes, changing the encoder, it should be bumped.
+        self._fmt_version = 0
         self._name = name
         self._description = description
         self._author = author
@@ -15,21 +16,21 @@ class Extension:
         self._versions = []
 
     def add_version(self, version: ExtensionVersion):
-        if self._version != version._fmt_version:
+        if self._fmt_version != version._fmt_version:
             raise Exception(
-                "ExtensionVersion version does not match Extension version. Please bump Extension version if needed."
+                "ExtensionVersion fmt version does not match Extension fmt version. Please bump Extension fmt version if needed."
             )
         self._versions.append(version)
 
 
 class ExtensionEncoder(ExtensionVersionEncoder):
-    def default(self, obj):
-        if isinstance(obj, Extension):
+    def default(self, o):
+        if isinstance(o, Extension):
             return {
-                "name": obj._name,
-                "description": obj._description,
-                "author": obj._author,
-                "created_on": obj._created_on,
-                "versions": obj._versions,
+                "name": o._name,
+                "description": o._description,
+                "author": o._author,
+                "created_on": o._created_on,
+                "versions": o._versions,
             }
-        return super().default(obj)
+        return super().default(o)
