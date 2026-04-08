@@ -15,9 +15,10 @@ class Extension:
         self._versions = []
 
     def add_version(self, version: ExtensionVersion):
-        if self._version != version._version:
+        if self._version != version._fmt_version:
             raise Exception(
-                "ExtensionVersion version does not match Extension version. Please bump Extension version if needed.")
+                "ExtensionVersion version does not match Extension version. Please bump Extension version if needed."
+            )
         self._versions.append(version)
 
 
@@ -29,6 +30,6 @@ class ExtensionEncoder(ExtensionVersionEncoder):
                 "description": obj._description,
                 "author": obj._author,
                 "created_on": obj._created_on,
-                "versions": obj._versions
+                "versions": obj._versions,
             }
         return super().default(obj)
