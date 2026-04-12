@@ -37,7 +37,7 @@ jobs:
     - name: Retrieve date
       run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         name: ${{ env.date }}
         tag_name: latest
