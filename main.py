@@ -31,9 +31,10 @@ def create_catalog(gh_token=None, source_filter=None):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--gh-token", help="Github API token to avoid rate limiting")
     parser.add_argument(
-        "--gh-token", help="Github API token to avoid rate limiting")
-    parser.add_argument("--source-filter", help="Source name filter", type=str, default=None)
+        "--source-filter", help="Source name filter", type=str, default=None
+    )
     args = parser.parse_args()
     create_catalog(args.gh_token, args.source_filter)
 
