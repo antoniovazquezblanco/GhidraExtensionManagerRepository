@@ -14,7 +14,6 @@ class Source(ABC):
 
     @staticmethod
     def list_sources(github_token=None):
-        import source
         for c in Source.__subclasses__():
             for s in c.list_sources(github_token):
                 yield s
