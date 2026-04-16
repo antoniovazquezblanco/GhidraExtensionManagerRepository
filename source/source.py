@@ -6,7 +6,7 @@ from model.extension import Extension
 
 
 class Source(ABC):
-    def name():
+    def name(self):
         raise NotImplementedError()
 
     def list_extensions(self) -> list[Extension]:
