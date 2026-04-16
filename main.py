@@ -16,7 +16,7 @@ def create_catalog(gh_token=None, source_filter=None):
     catalog = Catalog()
 
     for s in Source.list_sources(gh_token):
-        if source_filter and not source_filter in s.name():
+        if source_filter and source_filter not in s.name():
             continue
         try:
             print(f"[+] Retrieving extensions from {s}...")
