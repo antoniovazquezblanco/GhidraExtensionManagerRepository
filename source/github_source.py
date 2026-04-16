@@ -4,6 +4,7 @@
 import io
 import zipfile
 import requests
+from typing import Generator
 from github import Auth, Github
 from source.source import Source
 from source.extension_parser import parse_info, InvalidExtensionZip
@@ -92,7 +93,7 @@ class GithubSource(Source):
         auth = Auth.Token(token=token) if token else None
         self._gh = Github(auth=auth)
         self._repo = repo
-        self._asset_name_suffix = '.zip'
+        self._asset_name_suffix = ".zip"
 
     def _get_latest_release_assets(self):
         repo = self._gh.get_repo(self._repo)
@@ -100,7 +101,10 @@ class GithubSource(Source):
         print(f"[+] Found release with title '{release.title}'")
         # Filter out the non-zip assets...abs
         assets = [
-            asset for asset in release.assets if asset.name.endswith(self._asset_name_suffix)]
+            asset
+            for asset in release.assets
+            if asset.name.endswith(self._asset_name_suffix)
+        ]
         return assets
 
     def _get_props_from_asset(self, asset):
@@ -121,11 +125,18 @@ class GithubSource(Source):
                 props = self._get_props_from_asset(asset)
                 if not extension:
                     extension = Extension(
-                        name=props['name'], description=props['description'], author=props['author'], created_on=props['createdOn'])
+                        name=props["name"],
+                        description=props["description"],
+                        author=props["author"],
+                        created_on=props["createdOn"],
+                    )
                     print(f"[+] Found new extension named '{extension._name}'")
                 if extension:
-                    extension.add_version(ExtensionVersion(
-                        version=props['version'], url=asset.browser_download_url))
+                    extension.add_version(
+                        ExtensionVersion(
+                            version=props["version"], url=asset.browser_download_url
+                        )
+                    )
                     print(f"[+] Found extension for Ghidra {props['version']}")
             except InvalidExtensionZip as e:
                 pass
@@ -140,6 +151,6 @@ class GithubSource(Source):
         return f"GithubSource@{self._repo}"
 
     @staticmethod
-    def list_sources(github_token=None):
+    def list_sources(github_token=None) -> Generator[Source]:
         for n in GithubSource.GH_SOURCES:
             yield GithubSource(n, github_token)
