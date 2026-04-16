@@ -8,14 +8,14 @@ class InvalidExtensionZip(Exception):
     pass
 
 
-def _get_props_file(filenames):
+def _get_props_file(filenames: list[str]) -> str | None:
     for file in filenames:
         if file.endswith("extension.properties"):
             return file
     return None
 
 
-def _property_parse(content: str):
+def _property_parse(content: str) -> dict:
     props = {
         "name": None,
         "description": None,
@@ -33,7 +33,7 @@ def _property_parse(content: str):
     return props
 
 
-def parse_info(zipfile: ZipFile):
+def parse_info(zipfile: ZipFile) -> dict:
     props_file = _get_props_file(zipfile.namelist())
     if not props_file:
         raise InvalidExtensionZip("Could not find props file")
