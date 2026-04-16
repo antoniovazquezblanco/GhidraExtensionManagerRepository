@@ -9,7 +9,7 @@ from source.source import Source
 
 def create_catalog(gh_token=None, source_filter=None):
     # If a previous catalog file exists, delete it...
-    catalog_file = Path('catalog.json')
+    catalog_file = Path("catalog.json")
     if catalog_file.exists():
         catalog_file.unlink()
 
