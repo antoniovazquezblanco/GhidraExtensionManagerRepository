@@ -12,6 +12,19 @@ class ExtensionVersion:
         self._ext_version = version
         self._url = url
 
+    def __eq__(self, other):
+        if not isinstance(other, ExtensionVersion):
+            return False
+        return self._ext_version == other._ext_version
+
+    def __hash__(self):
+        return hash(self._ext_version)
+
+    def __lt__(self, other):
+        if not isinstance(other, ExtensionVersion):
+            raise NotImplementedError()
+        return self._ext_version < other._ext_version
+
 
 class ExtensionVersionEncoder(json.JSONEncoder):
     def default(self, o):
