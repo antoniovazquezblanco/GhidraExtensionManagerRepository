@@ -8,7 +8,7 @@ from typing import Generator
 from github import Auth, Github
 from github.GitReleaseAsset import GitReleaseAsset
 from source.source import Source
-from source.extension_parser import parse_info, InvalidExtensionZip
+from source.extension_parser import parse_info
 from model.extension import Extension
 from model.extension_version import ExtensionVersion
 
