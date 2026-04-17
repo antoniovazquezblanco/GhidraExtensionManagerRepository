@@ -4,7 +4,7 @@ on:
   pull_request:
   workflow_dispatch:
   schedule:
-  - cron: '0 0 1 * *' # Monthly
+    - cron: "0 0 1 * *" # Monthly
 permissions:
   contents: read
 
@@ -12,18 +12,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v6
-    - name: Setup python
-      uses: actions/setup-python@v6
-    - name: Install Python packages
-      run: pip install -r requirements.txt
-    - name: Generate catalog
-      run: python main.py --gh-token ${{ secrets.GITHUB_TOKEN }}
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v7
-      with:
-        path: catalog.json
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - name: Install Python packages
+        run: pip install -r requirements.txt
+      - name: Generate catalog
+        run: python main.py --gh-token ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          path: catalog.json
 
   release:
     runs-on: ubuntu-latest
@@ -32,15 +34,15 @@ jobs:
     permissions:
       contents: write
     steps:
-    - name: Download binaries
-      uses: actions/download-artifact@v8
-    - name: Retrieve date
-      run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-    - name: Release
-      uses: softprops/action-gh-release@v3
-      with:
-        name: ${{ env.date }}
-        tag_name: latest
-        files: catalog.json
-        overwrite_files: true
-        fail_on_unmatched_files: true
+      - name: Download binaries
+        uses: actions/download-artifact@v8
+      - name: Retrieve date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Release
+        uses: softprops/action-gh-release@v3
+        with:
+          name: ${{ env.date }}
+          tag_name: latest
+          files: catalog.json
+          overwrite_files: true
+          fail_on_unmatched_files: true
