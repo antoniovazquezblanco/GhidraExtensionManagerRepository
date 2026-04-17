@@ -20,7 +20,12 @@ class Catalog:
             raise Exception(
                 "Extension fmt version does not match catalog fmt version. Please bump catalog fmt version if needed."
             )
-        self._extensions.append(extension)
+        existing = next((ext for ext in self._extensions if ext == extension), None)
+        if existing is not None:
+            for version in extension._versions:
+                existing.add_version(version)
+        else:
+            self._extensions.append(extension)
 
     def write_to_file(self, path: Path):
         with path.open(mode="w") as f:
