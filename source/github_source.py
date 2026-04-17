@@ -100,7 +100,7 @@ class GithubSource(Source):
         repo = self._gh.get_repo(self._repo)
         release = repo.get_latest_release()
         print(f"[+] Found release with title '{release.title}'")
-        # Filter out the non-zip assets...abs
+        # Filter out the non-zip assets...
         assets = [
             asset
             for asset in release.assets
@@ -115,21 +115,17 @@ class GithubSource(Source):
         return props
 
     def _get_extension_version_from_asset(
-        self, extension: Extension | None, asset: GitReleaseAsset
+        self, asset: GitReleaseAsset
     ) -> Extension | None:
         print(f"[+] Processing asset '{asset.name}'")
         props = self._get_props_from_asset(asset)
         # Parse extension info
-        found_extension = Extension(
+        extension = Extension(
             name=props["name"],
             description=props["description"],
             author=props["author"],
             created_on=props["createdOn"],
         )
-        # If the found extension is new or we did not have an extension, overwrite it
-        if extension is None or extension._name != found_extension._name:
-            extension = found_extension
-            print(f"[+] Found new extension named '{extension._name}'")
         # Add found version
         extension.add_version(
             ExtensionVersion(version=props["version"], url=asset.browser_download_url)
@@ -139,18 +135,9 @@ class GithubSource(Source):
 
     def list_extensions(self) -> list[Extension]:
         extensions = []
-        current_extension = None
         assets = self._get_latest_release_assets()
         for asset in assets:
-            extension = self._get_extension_version_from_asset(current_extension, asset)
-            if (current_extension is None and extension is not None) or (
-                current_extension is not None
-                and extension is not None
-                and current_extension._name != extension._name
-            ):
-                # Found a new extension
-                current_extension = extension
-                extensions.append(extension)
+            extensions.append(self._get_extension_version_from_asset(asset))
         if not extensions or len(extensions) == 0:
             print("[!] Could not locate a valid asset for this extension...")
         return extensions
