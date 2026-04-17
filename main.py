@@ -20,7 +20,8 @@ def create_catalog(gh_token=None, source_filter=None):
             continue
         try:
             print(f"[+] Retrieving extensions from {s}...")
-            catalog.add_extension(s.list_extensions())
+            for e in s.list_extensions():
+                catalog.add_extension(e)
         except Exception as e:
             print(f"[!] Could not retrieve extensions for {s}")
             print(e)

@@ -6,6 +6,7 @@ import zipfile
 import requests
 from typing import Generator
 from github import Auth, Github
+from github.GitReleaseAsset import GitReleaseAsset
 from source.source import Source
 from source.extension_parser import parse_info, InvalidExtensionZip
 from model.extension import Extension
@@ -95,7 +96,7 @@ class GithubSource(Source):
         self._repo = repo
         self._asset_name_suffix = ".zip"
 
-    def _get_latest_release_assets(self):
+    def _get_latest_release_assets(self) -> GitReleaseAsset:
         repo = self._gh.get_repo(self._repo)
         release = repo.get_latest_release()
         print(f"[+] Found release with title '{release.title}'")
@@ -107,47 +108,57 @@ class GithubSource(Source):
         ]
         return assets
 
-    def _get_props_from_asset(self, asset):
+    def _get_props_from_asset(self, asset) -> dict:
         r = requests.get(asset.browser_download_url)
         z = zipfile.ZipFile(io.BytesIO(r.content))
         props = parse_info(z)
         return props
 
-    def _get_extension_from_asset(self, asset):
+    def _get_extension_version_from_asset(
+        self, extension: Extension | None, asset: GitReleaseAsset
+    ) -> Extension | None:
+        print(f"[+] Processing asset '{asset.name}'")
         props = self._get_props_from_asset(asset)
+        # Parse extension info
+        found_extension = Extension(
+            name=props["name"],
+            description=props["description"],
+            author=props["author"],
+            created_on=props["createdOn"],
+        )
+        # If the found extension is new or we did not have an extension, overwrite it
+        if extension is None or extension._name != found_extension._name:
+            extension = found_extension
+            print(f"[+] Found new extension named '{extension._name}'")
+        # Add found version
+        extension.add_version(
+            ExtensionVersion(version=props["version"], url=asset.browser_download_url)
+        )
+        print(f"[+] Found version for Ghidra {props['version']}")
+        return extension
 
     def list_extensions(self) -> list[Extension]:
+        extensions = []
+        current_extension = None
         assets = self._get_latest_release_assets()
-        extension = None
         for asset in assets:
-            try:
-                print(f"[+] Processing asset '{asset.name}'")
-                props = self._get_props_from_asset(asset)
-                if not extension:
-                    extension = Extension(
-                        name=props["name"],
-                        description=props["description"],
-                        author=props["author"],
-                        created_on=props["createdOn"],
-                    )
-                    print(f"[+] Found new extension named '{extension._name}'")
-                if extension:
-                    extension.add_version(
-                        ExtensionVersion(
-                            version=props["version"], url=asset.browser_download_url
-                        )
-                    )
-                    print(f"[+] Found extension for Ghidra {props['version']}")
-            except InvalidExtensionZip as e:
-                pass
-        if not extension:
+            extension = self._get_extension_version_from_asset(current_extension, asset)
+            if (current_extension is None and extension is not None) or (
+                current_extension is not None
+                and extension is not None
+                and current_extension._name != extension._name
+            ):
+                # Found a new extension
+                current_extension = extension
+                extensions.append(extension)
+        if not extensions or len(extensions) == 0:
             print("[!] Could not locate a valid asset for this extension...")
-        return extension
+        return extensions
 
     def name(self) -> str:
         return str(self)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"GithubSource@{self._repo}"
 
     @staticmethod
