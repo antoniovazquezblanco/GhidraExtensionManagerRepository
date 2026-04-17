@@ -20,7 +20,21 @@ class Extension:
             raise Exception(
                 "ExtensionVersion fmt version does not match Extension fmt version. Please bump Extension fmt version if needed."
             )
-        self._versions.append(version)
+        if version not in self._versions:
+            self._versions.append(version)
+
+    def __eq__(self, other):
+        if not isinstance(other, Extension):
+            raise NotImplementedError()
+        return self._name == other._name
+
+    def __hash__(self):
+        return hash(self._name)
+
+    def __lt__(self, other):
+        if not isinstance(other, Extension):
+            raise NotImplementedError()
+        return self._name < other._name
 
 
 class ExtensionEncoder(ExtensionVersionEncoder):
